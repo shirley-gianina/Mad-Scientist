@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Combo&family=Red+Rose:wght@700;900&family=VT323&display=swap" rel="stylesheet">
+    <title>Game</title>
+</head>
+<body>
+    <div id="game-board" class="hidden">
+        <canvas id="canvas" width="1240" height="
+        600"></canvas>
+    </div>
+    <div id="game-start">
+        <div class="container">
+            <div class="interface">
+                <div>
+                    <img src="./assets/User Interfaces/playerInterface.png" alt="image-mat-science">
+                </div>
+                <div class="center">
+                    <p>loading <span id="loading">0</span>%</p>
+                    <button id="play" class="hidden">
+                        PLAY
+                    </button>
+                </div>
+                <div>
+                    <img src="./assets/User Interfaces/enemyElectric.png" alt="image-enemy-game"> 
+                </div>
+            </div> 
+        </div>
+    </div>
+    <script src="./js/common/constants.js"></script>
+    <script src="./js/common/utils.js"></script>
+    <script src="./js/common/sprite.js"></script>
+    <script src="./js/models/background.js"></script>
+    <script src="./js/models/player/score.js"></script>
+    <script src="./js/models/player/life.js"></script>
+    <script src="./js/models/player/laser.js"></script>
+    <script src="./js/models/player/player.js"></script>
+    <script src="./js/models/enemies/base.js"></script>
+    <script src="./js/models/enemies/life.js"></script>
+    <script src="./js/models/enemies/enemy1.js"></script>
+    <script src="./js/models/enemies/enemy2.js"></script>
+    <script src="./js/models/enemies/enemy3.js"></script>
+    <script src="./js/models/potions/life.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html> 
