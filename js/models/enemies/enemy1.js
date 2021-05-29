@@ -23,7 +23,7 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/Enemies/Enemy Character1/Walk/spritesheet.png',
+                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Walk/spritesheet.png',
                 14, 1
             ),
 
@@ -31,7 +31,7 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/Enemies/Enemy Character1/Get Electric/spritesheet.png',
+                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Get Electric/spritesheet.png',
                 3, 1
             ),
 
@@ -39,7 +39,7 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/Enemies/Enemy Character1/Hit/spritesheet.png',
+                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Hit/spritesheet.png',
                 14, 1
             ),
 
@@ -48,8 +48,8 @@ class EnemyCharacter1 extends Enemy {
         this.sprite = this.sprites.walk
 
         this.sounds = {
-            attack: new Audio('https://shirley-gianina.github.io/Mad-Scientist/Sounds/player/hit.wav'),
-            attacked: new Audio('https://shirley-gianina.github.io/Mad-Scientist/Sounds/enemy/death_02.wav')
+            attack: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/hit.wav'),
+            attacked: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/enemy/death_02.wav')
         }
 
 
