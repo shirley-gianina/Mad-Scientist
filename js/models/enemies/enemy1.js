@@ -44,6 +44,7 @@ class EnemyCharacter1 extends Enemy {
             ),
 
         }
+        
 
         this.sprite = this.sprites.walk
 
