@@ -5,7 +5,7 @@ class EnemyCharacter2 extends Enemy{
         this.canvas = this.ctx.canvas;
         this.interval = null;
 
-        this.v = 2;
+        this.v = 3.2;
 
         this.width = 280;
         this.height = 280;
@@ -64,7 +64,7 @@ class EnemyCharacter2 extends Enemy{
         this.sounds.attacked.play()
         this.sprite = this.sprites.attacked
         if(this.life.value > 0) {
-            this.life.value -= 1
+            this.life.value -= 1.4
         }
     }
 

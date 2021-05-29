@@ -15,6 +15,7 @@ window.onload = () => {
     document.addEventListener('keyup', (event) => {
         game.onKeyEvent(event)
     })
+    
 
     playBtn.addEventListener('click', (event) => {
         gameBoard.classList.remove('hidden')

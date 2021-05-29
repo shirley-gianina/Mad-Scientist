@@ -27,7 +27,6 @@ class Game {
         this.scoreInterval = setInterval(() => {
           this.seconds += 1
           this.player.score.value = this.seconds;
-          this.player.lifeScore = this.potions;
 
           if(this.seconds % 5  === 0) {
             this.enemies.push(
@@ -36,7 +35,7 @@ class Game {
               new EnemyCharacter3(this.ctx, this.canvas.width + 1200)
             )
           }
-          if(this.seconds % 30 === 0) {
+          if(this.seconds % 50 === 0) {
             this.potions.push( 
               new PotionLife(this.ctx, {x:  this.canvas.width, y: 200})
             )
@@ -105,8 +104,9 @@ class Game {
         this.ctx.stroke();
 
         this.ctx.fillStyle = "white";
-        this.ctx.font = "bold 50px Courier";
-        this.ctx.fillText("Game Over!", this.canvas.width / 2 - 140, this.canvas.height / 2 + 10 );
+        this.ctx.font = "bold 150px Combo";
+        this.ctx.fillText(`Score: ${this.player.score.value}`, this.canvas.width / 2 - 240, this.canvas.height / 2 + 70 );
+
       }, 3000)
     }
 

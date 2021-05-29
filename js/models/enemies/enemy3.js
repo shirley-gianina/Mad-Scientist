@@ -5,7 +5,7 @@ class EnemyCharacter3 extends Enemy {
         this.canvas = this.ctx.canvas;
         this.interval = null;
 
-        this.v = 2;
+        this.v = 3.5;
 
         this.width = 280;
         this.height = 280;
@@ -52,8 +52,8 @@ class EnemyCharacter3 extends Enemy {
         this.sprite = this.sprites.walk
 
         this.sounds = {
-            attack: new Audio('https://shirley-gianina.github.io/assets/Sounds/player/hit.wav'),
-            attacked: new Audio('https://shirley-gianina.github.io/assets/Sounds/enemy/death_05.wav')
+            attack: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/hit.wav'),
+            attacked: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/enemy/death_05.wav')
         }
 
     }
@@ -63,7 +63,7 @@ class EnemyCharacter3 extends Enemy {
         this.sounds.attacked.play()
         this.sprite = this.sprites.attacked
         if(this.life.value > 0) {
-            this.life.value -= 0.8
+            this.life.value -= 2
         }
     }
 

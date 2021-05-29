@@ -10,7 +10,7 @@ class PlayerLife {
         this.img.onload = () => {
         this.img.isReady = true
         }
-        this.value = 250
+        this.value = PLAYER_MAX_LIFE
     }
 
     isReady() {

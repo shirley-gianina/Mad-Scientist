@@ -156,7 +156,9 @@ class Player {
 
     getLife() {
         this.sounds.getLife.play()
-        this.life.value = 200
+        if(this.life.value <= PLAYER_MAX_LIFE - POTION_LIFE) {
+            this.life.value += POTION_LIFE
+        }
     }
 
     die() {

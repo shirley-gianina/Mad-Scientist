@@ -3,14 +3,16 @@ class Background {
         this.ctx = ctx
         this.canvas = this.ctx.canvas
 
-        this.w = this.canvas.width * 4
-        this.x = 0;
-        this.y = 0;
+        this.w = this.canvas.width * 48
 
-        this.vy = 1;
+        this.x = 0
+        this.y = 0
+
+        this.vx = 2;
+
 
         this.backgroundImg = new Image()
-        this.backgroundImg.src = 'https://shirley-gianina.github.io/Mad-Scientist/assets/Backgrounds/2.png';
+        this.backgroundImg.src = 'https://shirley-gianina.github.io/Mad-Scientist/assets/Backgrounds/spritesheet.png';
         this.backgroundImg.isReady = false
         this.backgroundImg.onload = () => {
           this.backgroundImg.isReady = true
@@ -26,6 +28,7 @@ class Background {
         )
     }
 
+
     draw() {
         if(this.isReady()) {
             this.ctx.drawImage (
@@ -38,7 +41,7 @@ class Background {
         
             this.ctx.drawImage (
                 this.backgroundImg,
-                this.x + this.w - 3,
+                this.x + this.w,
                 this.y,
                 this.w,
                 this.canvas.height
@@ -52,7 +55,7 @@ class Background {
             if (this.x + this.w <= 0) {
                 this.x = 0;
             } else {
-                this.x -= this.vy;
+                this.x -= this.vx;
             }
         }
     }
