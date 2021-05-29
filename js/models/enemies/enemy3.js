@@ -5,7 +5,7 @@ class EnemyCharacter3 extends Enemy {
         this.canvas = this.ctx.canvas;
         this.interval = null;
 
-        this.v = 3.5;
+        this.v = 3;
 
         this.width = 280;
         this.height = 280;
