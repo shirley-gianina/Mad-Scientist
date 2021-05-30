@@ -8,7 +8,7 @@ class PlayerLife {
         this.img.isReady = false
         
         this.img.onload = () => {
-        this.img.isReady = true
+            this.img.isReady = true
         }
         this.value = PLAYER_MAX_LIFE
     }
@@ -46,14 +46,6 @@ class PlayerLife {
 
         }
 
-    }
-
-    move() {
-        if (this.x + this.w <= 0) {
-            this.x = 0;
-        } else {
-            this.x -= this.vy;
-        }
     }
 
 }

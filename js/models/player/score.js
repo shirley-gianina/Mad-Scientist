@@ -32,24 +32,24 @@ class PlayerScore {
         if(this.isReady()) {
             this.ctx.beginPath();
             this.ctx.fillStyle = "black";
-            this.ctx.fillRect(this.canvas.width - 180, 23, 172, 36)
+            this.ctx.fillRect(this.canvas.width - 190, 23, 172, 46)
             this.ctx.stroke();
 
             this.ctx.fillStyle = "white";
-            this.ctx.fillRect(this.canvas.width - 184, 28, 170, 26)
+            this.ctx.fillRect(this.canvas.width - 194, 28, 170, 36)
             this.ctx.stroke();
 
 
             this.ctx.drawImage (
                 this.imgScore,
-                this.canvas.width - 200,
-                16,
-                54,
-                60
+                this.canvas.width - 220,
+                14,
+                58,
+                80
             );
             this.ctx.fillStyle = "black";  
             this.ctx.font = "bold 24px Courier";
-            this.ctx.fillText(`${this.value} M`, this.canvas.width - 118, 49);
+            this.ctx.fillText(`${this.value} M`, this.canvas.width - 120, 55);
         } 
 
     }

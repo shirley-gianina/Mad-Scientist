@@ -8,7 +8,6 @@ class Game {
       this.scoreInterval = null;
 
       this.fps = 1000 / 150
-      this.drawCount = 0;
       this.background = new Background(ctx)
       this.player = new Player(ctx)
 
@@ -23,38 +22,37 @@ class Game {
     }
 
     start() {
-      if (!this.scoreInterval) {
-        this.scoreInterval = setInterval(() => {
-          this.seconds += 1
-          this.player.score.value = this.seconds;
 
-          if(this.seconds % 5  === 0) {
-            this.enemies.push(
-              new EnemyCharacter1(this.ctx, this.canvas.width),
-              new EnemyCharacter2(this.ctx, this.canvas.width + 800),
-              new EnemyCharacter3(this.ctx, this.canvas.width + 1200)
-            )
-          }
-          if(this.seconds % 50 === 0) {
-            this.potions.push( 
-              new PotionLife(this.ctx, {x:  this.canvas.width, y: 200})
-            )
-          }
-        }, 1000);
-      }
+      this.scoreInterval = setInterval(() => {
+        this.seconds += 1 // contamos los segundos
+        this.player.score.value = this.seconds;
+        
+        // cada 5 seg
+        if(this.seconds % 5  === 0) {
+          this.enemies.push(
+            new Enemy(this.ctx, random(this.canvas.width, this.canvas.width * 2), this.canvas.height - 360, ENEMY_1_CONFIG),
+            new Enemy(this.ctx, random(this.canvas.width, this.canvas.width * 2), this.canvas.height - 360, ENEMY_2_CONFIG),
+            new Enemy(this.ctx, random(this.canvas.width, this.canvas.width * 2), this.canvas.height - 360, ENEMY_3_CONFIG),
+          )
+        }
+        // cada 50 seg
+        if(this.seconds % 50 === 0) {
+          this.potions.push( 
+            new PotionLife(this.ctx, {x:  this.canvas.width, y: 200})
+          )
+        }
+      }, 1000);
 
-      if (!this.gameInterval) {
-        this.gameInterval = setInterval(() => {
-          this.sounds.theme.autoplay = true
-          this.sounds.theme.volume = 0.1;
-          this.sounds.theme.play()
-          this.clear()
-          this.move()
-          this.draw()
-          this.checkLife()
-          this.checkCollisions()
-        }, this.fps)
-      }
+      this.gameInterval = setInterval(() => {
+        this.sounds.theme.autoplay = true
+        this.sounds.theme.volume = 0.1;
+        this.sounds.theme.play()
+        this.clear()
+        this.move()
+        this.draw()
+        this.checkLife()
+        this.checkCollisions()
+      }, this.fps)
 
     }
 
@@ -63,7 +61,6 @@ class Game {
     }
 
     draw() {
-      this.drawCount += 1
       this.background.draw();
       this.potions.forEach(potion => potion.draw())
       this.player.draw();
@@ -85,6 +82,8 @@ class Game {
             this.player.jump() 
             break;
         case SPACE:
+          // en el caso que pulsa la tecla, ataca 
+          // en caso contrario deja de atacar.  
           this.player.attack(status)
             break;
      }
@@ -96,6 +95,9 @@ class Game {
       this.player.die()
 
       setTimeout(() => {
+        // paramos los intervalos solo despues de 3s
+        // para que se pueda la animacion completa de cuando
+        // muere el player.
         clearInterval(this.gameInterval)
         clearInterval(this.scoreInterval)
 
@@ -111,32 +113,38 @@ class Game {
     }
 
     checkLife() {
-      if (!this.player.hasLife()) {
+      // si el player no tiene vida el juego ha terminado
+      if (!this.player.isAlive()) {
         this.gameOver()
       }
     }
 
     checkCollisions() {
-      const restPotions = this.potions.filter(potion => !collidesWith(this.player, potion))
+      
+      const collidedWithPotion = this.potions.some((potion) => collidesWith(this.player, potion));
 
-      if (this.potions.length > restPotions.length) {
-        this.player.getLife()
+      if(collidedWithPotion === true) {
+        this.player.addLife()
+        this.potions = this.potions.filter(potion => !collidesWith(this.player, potion))
       }
   
-      this.potions = restPotions
-
-      let isAttacked = false
+      let attackedStatus = false
 
       for(let enemy of this.enemies) {
+        // si el player esta atacando y algun enemigo ha sido disparado con el laser
         if(this.player.isAttacking() && collidesWith(enemy, this.player.laser)) {
           enemy.attacked()
         }
+        // si algun enemigo choca con el player
         if(collidesWith(this.player, enemy)) {
           enemy.attack()
-          isAttacked = true
+          attackedStatus = true
         }
       }
-      this.player.attacked(isAttacked)
+
+      // deja de ser atacado en el caso que el status es false
+      this.player.attacked(attackedStatus)
+
     }
 
   }

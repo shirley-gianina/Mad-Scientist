@@ -13,8 +13,7 @@ class Player {
             x: 0,
             y: this.canvas.height - 280
         }
-        
-        this.shooted = false;
+
         this.bottomY = this.pos.y;
         this.topY = 20;
 
@@ -63,35 +62,18 @@ class Player {
             jump: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/jump.wav'),
             attack: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/shoot.wav'),
             die: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/losing.wav'),
-            getLife: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/get_life.wav'),
+            life: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/get_life.wav'),
             attacked: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/hit.wav')
         }
 
         this.isJumping = false
 
         this.laser = new Laser(ctx, this.pos)
-        this.drawCount = 0;
-
         this.life = new PlayerLife(ctx)
         this.score = new PlayerScore(ctx)
-        
-
-    }
-
-    drawCircle() {
-        const center = calculateCenter(this)
-        this.ctx.beginPath();
-        this.ctx.arc(center.X, center.Y, 60, 0, 2 * Math.PI, false);
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = '#FF0000';
-        this.ctx.stroke();   
     }
 
     draw() {
-
-        // this.drawCircle()
-
-        this.drawCount += 1
 
         if(this.actions.jump === true) {
             this.pos.y += this.vy
@@ -134,6 +116,23 @@ class Player {
         this.score.draw()
     }
 
+
+    isAttacking() {
+        return this.actions.attack
+    }
+
+    isAlive() {
+        return this.life.value > 0
+    }
+
+    addLife() {
+        this.sounds.life.play()
+
+        if(this.life.value <= PLAYER_MAX_LIFE - POTION_LIFE) {
+            this.life.value += POTION_LIFE
+        }
+    }
+
     attack(status) {
         this.sounds.attack.volume = 0.9
         this.sounds.attack.play()
@@ -144,21 +143,6 @@ class Player {
     attacked(status) {
         this.actions.attacked = status
         this.actions.walk = !status
-    }
-
-    isAttacking() {
-        return this.actions.attack
-    }
-
-    hasLife() {
-        return this.life.value > 0
-    }
-
-    getLife() {
-        this.sounds.getLife.play()
-        if(this.life.value <= PLAYER_MAX_LIFE - POTION_LIFE) {
-            this.life.value += POTION_LIFE
-        }
     }
 
     die() {

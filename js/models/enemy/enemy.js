@@ -1,19 +1,17 @@
-class EnemyCharacter1 extends Enemy {
-    constructor(ctx, x) {
-        super()
-
+class Enemy {
+    constructor(ctx, x, y, config) {
         this.ctx = ctx;
         this.canvas = this.ctx.canvas;
-        this.interval = null;
 
-        this.v = 3;
+        this.vx = config.vx;
 
-        this.width = 280;
-        this.height = 280;
+        this.width = config.width;
+        this.height = config.height
 
+        this.attackLife = config.attackLife
         this.pos = {
-            x: x,
-            y: this.canvas.height - 360
+            x: x, 
+            y: y
         }
 
         this.life = new EnemyLife(this.ctx, this.pos)
@@ -23,7 +21,7 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Walk/spritesheet.png',
+                config.images.walk, 
                 14, 1
             ),
 
@@ -31,7 +29,7 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Get Electric/spritesheet.png',
+                config.images.attacked,
                 3, 1
             ),
 
@@ -39,21 +37,39 @@ class EnemyCharacter1 extends Enemy {
                 this.ctx,
                 this.pos,
                 this.width, this.height,
-                'https://shirley-gianina.github.io/Mad-Scientist/assets/Enemies/Enemy Character1/Hit/spritesheet.png',
+                config.images.attack,
                 14, 1
             ),
 
         }
-        
 
         this.sprite = this.sprites.walk
 
         this.sounds = {
-            attack: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/player/hit.wav'),
-            attacked: new Audio('https://shirley-gianina.github.io/Mad-Scientist/assets/Sounds/enemy/death_02.wav')
+            attack: new Audio(config.sounds.attack),
+            attacked: new Audio(config.sounds.attacked)
         }
+    }
+
+    draw() {
+        this.life.draw()
+        this.sprite.draw()
+        this.sprite.animate()
+    }
+
+    move() {
+        this.pos.x -= this.vx;
+    }
+
+    isAlive() {
+        return this.life.value > 0
+    }
 
 
+    attack() {
+        this.sounds.attack.volume = 0.5
+        this.sounds.attack.play()
+        this.sprite = this.sprites.attack
     }
 
     attacked() {
@@ -61,7 +77,7 @@ class EnemyCharacter1 extends Enemy {
         this.sounds.attacked.play()
         this.sprite = this.sprites.attacked
         if(this.life.value > 0) {
-            this.life.value -= 2
+            this.life.value -= this.attackLife
         }
     }
 

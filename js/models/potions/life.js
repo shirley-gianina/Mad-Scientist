@@ -18,18 +18,7 @@ class PotionLife {
 
     }
 
-    drawCircle() {
-        const center = calculateCenter(this)
-        this.ctx.beginPath();
-        this.ctx.arc(center.X, center.Y, 45, 0, 2 * Math.PI, false);
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = '#FF0000';
-        this.ctx.stroke();
-    }
-
-
     draw() {
-        // this.drawCircle()
         this.sprite.draw()
         this.sprite.animate() 
     }

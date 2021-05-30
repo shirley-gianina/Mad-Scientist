@@ -1,3 +1,4 @@
+// calcula un numero aleatorio entre un minimo y un maximo
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 
@@ -9,6 +10,7 @@ function calculateCenter(element) {
 }
 
 function collidesWith(element1, element2) {
+    // comprueba si 2 elementos estan colisionando
     const circle1 = calculateCenter(element1);
     const circle2 = calculateCenter(element2);
 
